@@ -1,0 +1,28 @@
+
+<h1> This is the BookHub Homepage </h1>
+
+<form action="">
+  <input type="text">
+  <input type="submit"> 
+</form>
+
+<ul id='book_list'>
+
+</ul>
+
+<script src='http://code.jquery.com/jquery-2.1.1.min.js'></script>
+<script>
+  $(function(){
+    $.get('/books.json', function(books){
+      console.log("return: "+ books);
+      $.each(books, function(index,value){
+        $('#book_list').append("<li><a href=''>"+value.name+"</a></li>");
+      });
+    }).fail(function(xhr, ajaxOptions, thrownError) {
+      console.log("error: "+ xhr.status);
+      console.log("error: "+ thrownError);
+    }).always(function() {
+      console.log( "finished" );
+    });
+  });
+</script>
